@@ -367,7 +367,7 @@
       if (evt.keyCode === 32) {
         evt.preventDefault();
         var needToRestartTheGame = this.state.currentStatus === Verdict.WIN ||
-            this.state.currentStatus === Verdict.FAIL;
+          this.state.currentStatus === Verdict.FAIL;
         this.initializeLevelAndStart(this.level, needToRestartTheGame);
 
         window.removeEventListener('keydown', this._pauseListener);
@@ -378,6 +378,25 @@
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
+      var context = this;
+
+      function writeText(textArray, contextWidth) {
+        var offset = 25;
+        for (var i = 0; i < textArray.length; i++) {
+          offset += 20;
+          if (contextWidth < context.ctx.measureText(textArray[i]).width) {
+            context.ctx.fillText(textArray[i], 210, offset);
+          } else {
+
+            for (var j = textArray[i].length; j >= 0; j--) {
+              var longText = textArray[i].substring(0, j);
+              if (context.ctx.measureText(longText).width < contextWidth) {
+                context.ctx.fillText(textArray[i], 210, offset);
+              }
+            };
+          }
+        }
+      }
       switch (this.state.currentStatus) {
         case Verdict.WIN:
           console.log('you have won!');
@@ -386,12 +405,26 @@
           console.log('you have failed!');
           break;
         case Verdict.PAUSE:
-          console.log('game is on pause!');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(210, 30, 240, 100);
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(200, 20, 240, 100);
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = 'black';
+          writeText(['Пендальф,', 'вышел ', 'покурить', 'трубку!'], 200);
           break;
         case Verdict.INTRO:
-          console.log('welcome to the game! Press Space to start');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(210, 30, 240, 100);
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(200, 20, 240, 100);
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = 'black';
+          writeText(['Доброго дня,', 'маленький хоббит!', 'Твое приключение  долгое Твое приключение', 'начинается!'], 200);
           break;
       }
+
+
     },
 
     /**
@@ -505,8 +538,8 @@
             })[0];
 
             return me.state === ObjectState.DISPOSED ?
-                Verdict.FAIL :
-                Verdict.CONTINUE;
+              Verdict.FAIL :
+              Verdict.CONTINUE;
           },
 
           /**
@@ -525,8 +558,8 @@
            */
           function checkTime(state) {
             return Date.now() - state.startTime > 3 * 60 * 1000 ?
-                Verdict.FAIL :
-                Verdict.CONTINUE;
+              Verdict.FAIL :
+              Verdict.CONTINUE;
           }
         ];
       }
@@ -574,8 +607,8 @@
         if (object.sprite) {
           var image = new Image(object.width, object.height);
           image.src = (object.spriteReversed && object.direction & Direction.LEFT) ?
-              object.spriteReversed :
-              object.sprite;
+            object.spriteReversed :
+            object.sprite;
           this.ctx.drawImage(image, object.x, object.y, object.width, object.height);
         }
       }, this);
