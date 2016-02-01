@@ -380,29 +380,31 @@
     _drawPauseScreen: function() {
       var context = this;
 
-      function writeText(textArray, contextWidth) {
+      function writeText(textArray) {
         var offset = 25;
         for (var i = 0; i < textArray.length; i++) {
           offset += 20;
-          if (contextWidth < context.ctx.measureText(textArray[i]).width) {
-            context.ctx.fillText(textArray[i], 210, offset);
-          } else {
-
-            for (var j = textArray[i].length; j >= 0; j--) {
-              var longText = textArray[i].substring(0, j);
-              if (context.ctx.measureText(longText).width < contextWidth) {
-                context.ctx.fillText(textArray[i], 210, offset);
-              }
-            };
-          }
+          context.ctx.fillText(textArray[i], 210, offset);
         }
       }
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          console.log('you have won!');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(210, 30, 240, 100);
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(200, 20, 240, 100);
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = 'black';
+          writeText(['Ты спас', 'Средиземье!']);
           break;
         case Verdict.FAIL:
-          console.log('you have failed!');
+          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+          this.ctx.fillRect(210, 30, 240, 100);
+          this.ctx.fillStyle = '#FFFFFF';
+          this.ctx.fillRect(200, 20, 240, 100);
+          this.ctx.font = '16px PT Mono';
+          this.ctx.fillStyle = 'black';
+          writeText(['Саурон победил!']);
           break;
         case Verdict.PAUSE:
           this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -411,7 +413,7 @@
           this.ctx.fillRect(200, 20, 240, 100);
           this.ctx.font = '16px PT Mono';
           this.ctx.fillStyle = 'black';
-          writeText(['Пендальф,', 'вышел ', 'покурить', 'трубку!'], 200);
+          writeText(['Пендальф вышел', 'покурить трубку!']);
           break;
         case Verdict.INTRO:
           this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -420,7 +422,7 @@
           this.ctx.fillRect(200, 20, 240, 100);
           this.ctx.font = '16px PT Mono';
           this.ctx.fillStyle = 'black';
-          writeText(['Доброго дня,', 'маленький хоббит!', 'Твое приключение  долгое Твое приключение', 'начинается!'], 200);
+          writeText(['Доброго дня,', 'маленький хоббит!', 'Твое приключение', 'начинается!']);
           break;
       }
 
