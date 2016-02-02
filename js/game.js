@@ -387,41 +387,30 @@
           context.ctx.fillText(textArray[i], 210, offset);
         }
       }
+
+      function figure() {
+        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        this.ctx.fillRect(210, 30, 240, 100);
+        this.ctx.fillStyle = '#FFFFFF';
+        this.ctx.fillRect(200, 20, 240, 100);
+        this.ctx.font = '16px PT Mono';
+        this.ctx.fillStyle = 'black';
+      }
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(210, 30, 240, 100);
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(200, 20, 240, 100);
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = 'black';
+          figure();
           writeText(['Ты спас', 'Средиземье!']);
           break;
         case Verdict.FAIL:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(210, 30, 240, 100);
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(200, 20, 240, 100);
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = 'black';
+          figure();
           writeText(['Саурон победил!']);
           break;
         case Verdict.PAUSE:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(210, 30, 240, 100);
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(200, 20, 240, 100);
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = 'black';
+          figure();
           writeText(['Пендальф вышел', 'покурить трубку!']);
           break;
         case Verdict.INTRO:
-          this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-          this.ctx.fillRect(210, 30, 240, 100);
-          this.ctx.fillStyle = '#FFFFFF';
-          this.ctx.fillRect(200, 20, 240, 100);
-          this.ctx.font = '16px PT Mono';
-          this.ctx.fillStyle = 'black';
+          figure();
           writeText(['Доброго дня,', 'маленький хоббит!', 'Твое приключение', 'начинается!']);
           break;
       }
