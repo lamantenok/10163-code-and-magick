@@ -380,8 +380,6 @@
     _drawPauseScreen: function() {
       var context = this;
 
-      var context = this;
-
       function writeText(textArray) {
         var offset = 25;
         for (var i = 0; i < textArray.length; i++) {
