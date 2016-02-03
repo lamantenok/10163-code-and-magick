@@ -380,6 +380,8 @@
     _drawPauseScreen: function() {
       var context = this;
 
+      var context = this;
+
       function writeText(textArray) {
         var offset = 25;
         for (var i = 0; i < textArray.length; i++) {
@@ -389,12 +391,12 @@
       }
 
       function figure() {
-        this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-        this.ctx.fillRect(210, 30, 240, 100);
-        this.ctx.fillStyle = '#FFFFFF';
-        this.ctx.fillRect(200, 20, 240, 100);
-        this.ctx.font = '16px PT Mono';
-        this.ctx.fillStyle = 'black';
+        context.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        context.ctx.fillRect(210, 30, 240, 100);
+        context.ctx.fillStyle = '#FFFFFF';
+        context.ctx.fillRect(200, 20, 240, 100);
+        context.ctx.font = '16px PT Mono';
+        context.ctx.fillStyle = 'black';
       }
       switch (this.state.currentStatus) {
         case Verdict.WIN:
