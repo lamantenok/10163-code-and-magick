@@ -9,32 +9,39 @@
   var formText = document.getElementById('review-text');
   var formName = document.getElementById('review-name');
   var btnSubmit = document.querySelector('.review-submit');
+  btnSubmit.disabled = true;
 
-  formText.addEventListener('keydown', validation, false);
-
-  formName.addEventListener('keydown', validation, false);
+  document.forms[1].addEventListener('keydown', validation, false);
+  document.forms[1].addEventListener('change', validation, false);
 
 
   function validation() {
     var formNameValue = document.getElementById('review-name').value;
     var formTextValue = document.getElementById('review-text').value;
-    if (formNameValue.length > 0) {
-      btnSubmit.disabled = false;
-    } else {
+    var revieValue = +(document.querySelector("[name='review-mark']:checked").value);
+
+    if (formNameValue.length === 0) {
       btnSubmit.disabled = true;
+
+    } else if (formTextValue.length === 0 && revieValue <= 3) {
+      btnSubmit.disabled = true;
+    } else {
+      btnSubmit.disabled = false;
     }
 
-    for (var i = 1; i <= 5; i++) {
-      var revieValue = document.getElementById('review-mark-' + i).value;
-      if (formTextValue.length > 0) {
-        if (revieValue.checked < 3) {
-          btnSubmit.disabled = true;
-        } else {
-          btnSubmit.disabled = false;
-        }
-      }
+    if (formNameValue.length === 0 && formTextValue.length === 0) {
+      document.querySelector('.review-fields-text').style.display = 'inline-block';
+      document.querySelector('.review-fields-name').style.display = 'inline-block';
+    } else if (formNameValue.length === 0 && formTextValue.length < 0) {
+      document.querySelector('.review-fields-text').style.display = 'none';
+      document.querySelector('.review-fields-name').style.display = 'inline-block';
+    } else if (formNameValue.length > 0 && formTextValue.length === 0) {
+      document.querySelector('.review-fields-text').style.display = 'inline-block';
+      document.querySelector('.review-fields-name').style.display = 'none';
+    } else {
+      document.querySelector('.review-fields-text').style.display = 'none';
+      document.querySelector('.review-fields-name').style.display = 'none';
     }
-
   }
   formOpenButton.onclick = function(evt) {
     evt.preventDefault();
