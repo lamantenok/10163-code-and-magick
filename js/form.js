@@ -6,8 +6,6 @@
   var formOpenButton = document.querySelector('.reviews-controls-new');
   var formCloseButton = document.querySelector('.review-form-close');
 
-  var formText = document.getElementById('review-text');
-  var formName = document.getElementById('review-name');
   var btnSubmit = document.querySelector('.review-submit');
   btnSubmit.disabled = true;
 
@@ -18,7 +16,7 @@
   function validation() {
     var formNameValue = document.getElementById('review-name').value;
     var formTextValue = document.getElementById('review-text').value;
-    var revieValue = +(document.querySelector("[name='review-mark']:checked").value);
+    var revieValue = +(document.querySelector('[name="review-mark"]:checked').value);
 
     if (formNameValue.length === 0) {
       btnSubmit.disabled = true;
