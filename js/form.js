@@ -19,11 +19,12 @@
     var revieValue = +(document.querySelector('[name="review-mark"]:checked').value);
     var emptyName = (formNameValue.length === 0);
     var emptyText = (formTextValue.length === 0);
-    var mark = (revieValue <= 3);
+    var mark = (revieValue < 3);
     var markText = emptyText && mark;
     var btnBlocked = emptyName && emptyText;
     document.querySelector('.review-fields-text').style.display = 'none';
     document.querySelector('.review-fields-name').style.display = 'none';
+    document.querySelector('.review-fields').style.display = 'none';
     if (emptyName) {
       btnSubmit.disabled = true;
 
@@ -33,13 +34,20 @@
       btnSubmit.disabled = false;
     }
 
-    if (btnBlocked) {
+    if (emptyName && markText) {
+      document.querySelector('.review-fields').style.display = 'inline-block';
+      document.querySelector('.review-fields-text').style.display = 'inline-block';
+      document.querySelector('.review-fields-name').style.display = 'inline-block';
+    } else if (btnBlocked) {
+      document.querySelector('.review-fields').style.display = 'inline-block';
       document.querySelector('.review-fields-text').style.display = 'inline-block';
       document.querySelector('.review-fields-name').style.display = 'inline-block';
     } else if (emptyName) {
       document.querySelector('.review-fields-name').style.display = 'inline-block';
-    } else if (emptyText || mark) {
+      document.querySelector('.review-fields').style.display = 'inline-block';
+    } else if (emptyText && mark) {
       document.querySelector('.review-fields-text').style.display = 'inline-block';
+      document.querySelector('.review-fields').style.display = 'inline-block';
     }
   }
   formOpenButton.onclick = function(evt) {
