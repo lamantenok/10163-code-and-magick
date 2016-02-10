@@ -19,12 +19,9 @@
     var revieValue = +(document.querySelector('[name="review-mark"]:checked').value);
     var emptyName = (formNameValue.length === 0);
     var emptyText = (formTextValue.length === 0);
-    var fullText = (formTextValue.length > 0);
-    var fullName = (formNameValue.length > 0);
     var mark = (revieValue <= 3);
     var markText = emptyText && mark;
     var btnBlocked = emptyName && emptyText;
-    var reviewContainer = emptyName && markText;
     document.querySelector('.review-fields-text').style.display = 'none';
     document.querySelector('.review-fields-name').style.display = 'none';
     if (emptyName) {
