@@ -17,28 +17,32 @@
     var formNameValue = document.getElementById('review-name').value;
     var formTextValue = document.getElementById('review-text').value;
     var revieValue = +(document.querySelector('[name="review-mark"]:checked').value);
-
-    if (formNameValue.length === 0) {
+    var emptyName = (formNameValue.length === 0);
+    var emptyText = (formTextValue.length === 0);
+    var fullText = (formTextValue.length > 0);
+    var fullName = (formNameValue.length > 0);
+    var mark = (revieValue <= 3);
+    var markText = emptyText && mark;
+    var btnBlocked = emptyName && emptyText;
+    var reviewContainer = emptyName && markText;
+    document.querySelector('.review-fields-text').style.display = 'none';
+    document.querySelector('.review-fields-name').style.display = 'none';
+    if (emptyName) {
       btnSubmit.disabled = true;
 
-    } else if (formTextValue.length === 0 && revieValue <= 3) {
+    } else if (emptyName || markText) {
       btnSubmit.disabled = true;
     } else {
       btnSubmit.disabled = false;
     }
 
-    if (formNameValue.length === 0 && formTextValue.length === 0) {
+    if (btnBlocked) {
       document.querySelector('.review-fields-text').style.display = 'inline-block';
       document.querySelector('.review-fields-name').style.display = 'inline-block';
-    } else if (formNameValue.length === 0 && formTextValue.length < 0) {
-      document.querySelector('.review-fields-text').style.display = 'none';
+    } else if (emptyName) {
       document.querySelector('.review-fields-name').style.display = 'inline-block';
-    } else if (formNameValue.length > 0 && formTextValue.length === 0) {
+    } else if (emptyText || mark) {
       document.querySelector('.review-fields-text').style.display = 'inline-block';
-      document.querySelector('.review-fields-name').style.display = 'none';
-    } else {
-      document.querySelector('.review-fields-text').style.display = 'none';
-      document.querySelector('.review-fields-name').style.display = 'none';
     }
   }
   formOpenButton.onclick = function(evt) {
