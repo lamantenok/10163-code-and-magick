@@ -4,6 +4,25 @@
   var formContainer = document.querySelector('.overlay-container');
   var formOpenButton = document.querySelector('.reviews-controls-new');
   var formCloseButton = document.querySelector('.review-form-close');
+  var reviewForm = document.querySelector('.review-form');
+
+  var formNameValueCookie = docCookies.getItem('userName');
+  var revieMarkCookie = docCookies.getItem('userMark');
+  document.getElementById('review-name').value = formNameValueCookie;
+  document.getElementById('review-mark-' + revieMarkCookie).checked = true;
+
+  reviewForm.onsubmit = function(evt) {
+    var formNameValue = document.getElementById('review-name').value;
+    var revieMark = document.querySelector('[name="review-mark"]:checked').value;
+    evt.preventDefault();
+    var myBirthday = new Date('2015-08-15');
+    var dateDif = (Date.now() - myBirthday) / 24 / 60 / 60 / 1000;
+    var cookieDays = +Date.now() + dateDif * 24 * 60 * 60 * 1000;
+    var formatDate = new Date(cookieDays).toUTCString();
+    document.cookie = 'userName=' + formNameValue + ';expires=' + formatDate;
+    document.cookie = 'userMark=' + revieMark + ';expires=' + formatDate;
+    reviewForm.submit();
+  };
 
   formOpenButton.onclick = function(evt) {
     evt.preventDefault();
