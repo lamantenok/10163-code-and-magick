@@ -40,7 +40,6 @@
       document.querySelector('.review-fields-name').style.display = 'inline-block';
     } else if (btnBlocked) {
       document.querySelector('.review-fields').style.display = 'inline-block';
-      document.querySelector('.review-fields-text').style.display = 'inline-block';
       document.querySelector('.review-fields-name').style.display = 'inline-block';
     } else if (emptyName) {
       document.querySelector('.review-fields-name').style.display = 'inline-block';
