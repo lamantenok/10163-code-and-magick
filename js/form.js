@@ -11,7 +11,7 @@
 
   document.forms[1].addEventListener('keydown', validation, false);
   document.forms[1].addEventListener('change', validation, false);
-
+  validation();
 
   function validation() {
     var formNameValue = document.getElementById('review-name').value;
@@ -41,11 +41,11 @@
     } else if (btnBlocked) {
       document.querySelector('.review-fields').style.display = 'inline-block';
       document.querySelector('.review-fields-name').style.display = 'inline-block';
-    } else if (emptyName) {
-      document.querySelector('.review-fields-name').style.display = 'inline-block';
-      document.querySelector('.review-fields').style.display = 'inline-block';
     } else if (emptyText && mark) {
       document.querySelector('.review-fields-text').style.display = 'inline-block';
+      document.querySelector('.review-fields').style.display = 'inline-block';
+    } else if (emptyName) {
+      document.querySelector('.review-fields-name').style.display = 'inline-block';
       document.querySelector('.review-fields').style.display = 'inline-block';
     }
   }
