@@ -8,10 +8,9 @@
 
   var btnSubmit = document.querySelector('.review-submit');
   btnSubmit.disabled = true;
-
-  document.forms[1].addEventListener('keydown', validation, false);
-  document.forms[1].addEventListener('change', validation, false);
   validation();
+  document.forms[1].addEventListener('change', validation, false);
+  document.forms[1].addEventListener('keyup', validation, false);
 
   function validation() {
     var formNameValue = document.getElementById('review-name').value;
@@ -21,32 +20,32 @@
     var emptyText = (formTextValue.length === 0);
     var mark = (revieValue < 3);
     var markText = emptyText && mark;
-    var btnBlocked = emptyName && emptyText;
     document.querySelector('.review-fields-text').style.display = 'none';
     document.querySelector('.review-fields-name').style.display = 'none';
     document.querySelector('.review-fields').style.display = 'none';
     if (emptyName) {
       btnSubmit.disabled = true;
 
-    } else if (emptyName || markText) {
+    } else if (markText) {
       btnSubmit.disabled = true;
     } else {
       btnSubmit.disabled = false;
     }
 
-    if (emptyName && markText) {
-      document.querySelector('.review-fields').style.display = 'inline-block';
+    if (emptyName) {
+      document.querySelector('.review-fields-name').style.display = 'inline-block';
+    } else {
+      document.querySelector('.review-fields-name').style.display = 'none';
+    }
+    if (markText) {
       document.querySelector('.review-fields-text').style.display = 'inline-block';
-      document.querySelector('.review-fields-name').style.display = 'inline-block';
-    } else if (btnBlocked) {
+    } else {
+      document.querySelector('.review-fields-text').style.display = 'none';
+    }
+    if (emptyName || markText) {
       document.querySelector('.review-fields').style.display = 'inline-block';
-      document.querySelector('.review-fields-name').style.display = 'inline-block';
-    } else if (emptyText && mark) {
-      document.querySelector('.review-fields-text').style.display = 'inline-block';
-      document.querySelector('.review-fields').style.display = 'inline-block';
-    } else if (emptyName) {
-      document.querySelector('.review-fields-name').style.display = 'inline-block';
-      document.querySelector('.review-fields').style.display = 'inline-block';
+    } else {
+      document.querySelector('.review-fields').style.display = 'none';
     }
   }
   formOpenButton.onclick = function(evt) {
