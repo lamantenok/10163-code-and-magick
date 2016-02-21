@@ -8,9 +8,14 @@
 
   var formNameValueCookie = docCookies.getItem('userName');
   var revieMarkCookie = docCookies.getItem('userMark');
-  document.getElementById('review-name').value = formNameValueCookie;
-  document.getElementById('review-mark-' + revieMarkCookie).checked = true;
 
+  if (formNameValueCookie !== null) {
+    document.getElementById('review-name').value = formNameValueCookie;
+  }
+
+  if (revieMarkCookie !== null) {
+    document.getElementById('review-mark-' + revieMarkCookie).checked = true;
+  }
   reviewForm.onsubmit = function(evt) {
     var formNameValue = document.getElementById('review-name').value;
     var revieMark = document.querySelector('[name="review-mark"]:checked').value;
@@ -19,8 +24,8 @@
     var dateDif = (Date.now() - myBirthday) / 24 / 60 / 60 / 1000;
     var cookieDays = +Date.now() + dateDif * 24 * 60 * 60 * 1000;
     var formatDate = new Date(cookieDays).toUTCString();
-    document.cookie = 'userName=' + formNameValue + ';expires=' + formatDate;
-    document.cookie = 'userMark=' + revieMark + ';expires=' + formatDate;
+    docCookies.setItem('userName', formNameValue, formatDate);
+    docCookies.setItem('userMark', revieMark, formatDate);
     reviewForm.submit();
   };
 
