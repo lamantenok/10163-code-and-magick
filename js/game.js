@@ -367,7 +367,7 @@
       if (evt.keyCode === 32) {
         evt.preventDefault();
         var needToRestartTheGame = this.state.currentStatus === Verdict.WIN ||
-            this.state.currentStatus === Verdict.FAIL;
+          this.state.currentStatus === Verdict.FAIL;
         this.initializeLevelAndStart(this.level, needToRestartTheGame);
 
         window.removeEventListener('keydown', this._pauseListener);
@@ -378,20 +378,44 @@
      * Отрисовка экрана паузы.
      */
     _drawPauseScreen: function() {
+      var context = this;
+
+      function writeText(textArray) {
+        var offset = 25;
+        for (var i = 0; i < textArray.length; i++) {
+          offset += 20;
+          context.ctx.fillText(textArray[i], 210, offset);
+        }
+      }
+
+      function figure() {
+        context.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        context.ctx.fillRect(210, 30, 240, 100);
+        context.ctx.fillStyle = '#FFFFFF';
+        context.ctx.fillRect(200, 20, 240, 100);
+        context.ctx.font = '16px PT Mono';
+        context.ctx.fillStyle = 'black';
+      }
       switch (this.state.currentStatus) {
         case Verdict.WIN:
-          console.log('you have won!');
+          figure();
+          writeText(['Ты спас', 'Средиземье!']);
           break;
         case Verdict.FAIL:
-          console.log('you have failed!');
+          figure();
+          writeText(['Саурон победил!']);
           break;
         case Verdict.PAUSE:
-          console.log('game is on pause!');
+          figure();
+          writeText(['Пендальф вышел', 'покурить трубку!']);
           break;
         case Verdict.INTRO:
-          console.log('welcome to the game! Press Space to start');
+          figure();
+          writeText(['Доброго дня,', 'маленький хоббит!', 'Твое приключение', 'начинается!']);
           break;
       }
+
+
     },
 
     /**
@@ -505,8 +529,8 @@
             })[0];
 
             return me.state === ObjectState.DISPOSED ?
-                Verdict.FAIL :
-                Verdict.CONTINUE;
+              Verdict.FAIL :
+              Verdict.CONTINUE;
           },
 
           /**
@@ -525,8 +549,8 @@
            */
           function checkTime(state) {
             return Date.now() - state.startTime > 3 * 60 * 1000 ?
-                Verdict.FAIL :
-                Verdict.CONTINUE;
+              Verdict.FAIL :
+              Verdict.CONTINUE;
           }
         ];
       }
@@ -574,8 +598,8 @@
         if (object.sprite) {
           var image = new Image(object.width, object.height);
           image.src = (object.spriteReversed && object.direction & Direction.LEFT) ?
-              object.spriteReversed :
-              object.sprite;
+            object.spriteReversed :
+            object.sprite;
           this.ctx.drawImage(image, object.x, object.y, object.width, object.height);
         }
       }, this);
