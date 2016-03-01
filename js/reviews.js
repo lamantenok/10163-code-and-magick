@@ -2,10 +2,10 @@
  (function() {
    var container = document.querySelector('.reviews-list');
    var filter = document.querySelector('.reviews-filter');
-   var element;
+
    filter.classList.add('invisible');
    reviews.forEach(function(review) {
-     element = reviewtemplate(review);
+     var element = reviewtemplate(review);
      container.appendChild(element);
    });
 
@@ -14,14 +14,14 @@
 
 
      if ('content' in template) {
-       element = template.content.children[0].cloneNode(true);
+      var  element = template.content.children[0].cloneNode(true);
      } else {
-       element = template.children[0].cloneNode(true);
+       var element = template.children[0].cloneNode(true);
      }
 
      element.querySelector('.review-text').textContent = data.description;
-     var oldImg = element.querySelector('.review-author');
      var reviwRating = element.querySelector('.review-rating');
+     var oldImg = element.querySelector('.review-author');
      var reviewImg = new Image();
      var reviwContainer = element;
      if (data.rating === 2) {
@@ -50,3 +50,4 @@
    }
    filter.classList.remove('invisible');
  })();
+ 
