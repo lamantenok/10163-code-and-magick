@@ -6,15 +6,6 @@
    var reviewsBlock = document.querySelector('.reviews');
    var activeFilter = 'reviews-all';
    var loadedReviews = null;
-   /* 
-   var filters = document.querySelectorAll('.reviews-filter-item');
-   for (var i = 0; i <= filters.length; i++) {
-     console.log(filters[i]);
-     filters[i].onclick = function(evt) {
-       var clickedElement = evt.targer.id;
-       console.log('filters');
-     }
-   }*/
    var filters = document.querySelectorAll('[name="reviews"]');
    for (var i = 0; i < filters.length; i++) {
      filters[i].onclick = function(evt) {
@@ -29,10 +20,6 @@
 
    function renderReviews(review) {
      container.innerHTML = '';
-     /*     review.forEach(function(review) {
-       var element = reviewtemplate(review);
-       container.appendChild(element);
-     });*/
      var fragment = document.createDocumentFragment();
      reviews.forEach(function(review) {
        var element = reviewtemplate(review);
@@ -117,16 +104,16 @@
      var reviwRating = element.querySelector('.review-rating');
      var reviewContainer = element;
      var reviewImg = new Image();
-     if (data.rating == 2) {
+     if (data.rating === 2) {
        reviwRating.classList.add('review-rating-two');
      }
-     if (data.rating == 3) {
+     if (data.rating === 3) {
        reviwRating.classList.add('review-rating-three');
      }
-     if (data.rating == 4) {
+     if (data.rating === 4) {
        reviwRating.classList.add('review-rating-four');
      }
-     if (data.rating == 5) {
+     if (data.rating === 5) {
        reviwRating.classList.add('review-rating-five');
      }
      reviewImg.onload = function() {
@@ -145,3 +132,4 @@
 
    filter.classList.remove('invisible');
  })();
+ 
