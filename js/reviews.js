@@ -18,8 +18,9 @@
    filter.classList.add('invisible');
    reviewsBlock.classList.add('reviews-list-loading');
 
-   function renderReviews(review) {
+   function renderReviews(reviews) {
      container.innerHTML = '';
+
      var fragment = document.createDocumentFragment();
      reviews.forEach(function(review) {
        var element = reviewtemplate(review);
@@ -44,7 +45,6 @@
          filteredReviews = recentReviews.sort(function(a, b) {
            return new Date(b.date) > new Date(a.date);
          });
-         console.log('recent');
          break;
        case 'reviews-good':
          filteredReviews = filteredReviews.filter(function(elm) {
@@ -53,7 +53,6 @@
          filteredReviews = filteredReviews.sort(function(a, b) {
            return b.rating - a.rating;
          });
-         console.log('good');
          break;
        case 'reviews-bad':
          filteredReviews = filteredReviews.filter(function(elm) {
@@ -62,13 +61,11 @@
          filteredReviews = filteredReviews.sort(function(a, b) {
            return a.rating - b.rating;
          });
-         console.log('bad');
          break;
        case 'reviews-popular':
          filteredReviews = filteredReviews.sort(function(a, b) {
            return b.review_usefulness - a.review_usefulness;
          });
-         console.log('pop');
          break;
      }
      activeFilter = id;
