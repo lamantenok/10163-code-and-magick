@@ -1,6 +1,5 @@
  'use strict';
  (function() {
-   var reviewDate = new Date() - (14 * 24 * 60 * 60 * 1000);
    var container = document.querySelector('.reviews-list');
    var filter = document.querySelector('.reviews-filter');
    var reviewsBlock = document.querySelector('.reviews');
@@ -39,11 +38,12 @@
        case 'reviews-all':
          break;
        case 'reviews-recent':
-         var recentReviews = filteredReviews.filter(function(elm) {
-           return new Date(elm.date) > reviewDate;
-         });
-         filteredReviews = recentReviews.sort(function(a, b) {
-           return new Date(b.date) > new Date(a.date);
+         filteredReviews = filteredReviews.sort(function(a, b) {
+           if (new Date(b.date) > new Date(a.date)) {
+             return 1;
+           } else {
+             return -1;
+           }
          });
          break;
        case 'reviews-good':
